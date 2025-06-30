@@ -1,0 +1,63 @@
+/* Basic Reset & Font */
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --background-light: #f4f7f6;
+    --text-color-dark: #333;
+    --text-color-light: #fff;
+    --error-color: #dc3545;
+    --card-background: #fff;
+    --border-color: #ddd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* We'll add this via Google Fonts */
+    background-color: var(--background-light);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+/* Material Icons styling - adjust size if needed */
+.material-icons {
+    vertical-align: middle;
+    font-size: 20px; /* Default size */
+    margin-right: 5px;
+}
