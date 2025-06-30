@@ -1,14 +1,38 @@
 /* Basic Reset & Font */
 :root {
+    /* Light Theme Variables (Default) */
     --primary-color: #007bff;
     --primary-hover-color: #0056b3;
-    --background-light: #f4f7f6;
-    --text-color-dark: #333;
-    --text-color-light: #fff;
-    --error-color: #dc3545;
+    --background-color: #f4f7f6; /* Main background */
     --card-background: #fff;
+    --text-color-dark: #333;
+    --text-color-light: #fff; /* For text on dark backgrounds */
+    --error-color: #dc3545;
     --border-color: #ddd;
+    --secondary-text-color: #555;
+    --header-background: #f8f8f8; /* Header if applicable */
+    --box-shadow-color: rgba(0, 0, 0, 0.08); /* General box shadow */
+    --gradient-start: #6dd5ed;
+    --gradient-end: #2193b0;
 }
+
+/* Dark Theme Variables */
+body.dark-theme {
+    --primary-color: #8be9fd; /* Lighter blue for dark mode accents */
+    --primary-hover-color: #bdc3c7; /* Grayish hover for accents */
+    --background-color: #282a36; /* Dracula background */
+    --card-background: #383a47; /* Slightly lighter card for contrast */
+    --text-color-dark: #f8f8f2; /* Light text on dark bg */
+    --text-color-light: #282a36; /* Dark text on light elements in dark mode (rare) */
+    --error-color: #ff5555;
+    --border-color: #44475a;
+    --secondary-text-color: #bdc3c7;
+    --header-background: #3a3c4a;
+    --box-shadow-color: rgba(0, 0, 0, 0.3);
+    --gradient-start: #44475a; /* Darker gradient for login page */
+    --gradient-end: #282a36;
+}
+
 
 * {
     margin: 0;
@@ -18,11 +42,12 @@
 
 body {
     font-family: 'Roboto', sans-serif; /* We'll add this via Google Fonts */
-    background-color: var(--background-light);
-    color: var(--text-color-dark);
+    background-color: var(--background-color); /* Use CSS variable */
+    color: var(--text-color-dark); /* Use CSS variable */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
 }
 
 #root {
@@ -48,7 +73,7 @@ button {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Add color transition */
 }
 
 button:hover {
@@ -60,4 +85,5 @@ button:hover {
     vertical-align: middle;
     font-size: 20px; /* Default size */
     margin-right: 5px;
+    transition: color 0.3s ease; /* Smooth icon color transition */
 }
