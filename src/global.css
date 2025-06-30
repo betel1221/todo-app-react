@@ -1,45 +1,55 @@
 /* Basic Reset & Font */
 :root {
-    /* Light Theme Variables (Default) */
-    --primary-color: #007bff;
-    --primary-hover-color: #0056b3;
-    --background-color: #f4f7f6; /* Main background */
-    --card-background: #fff;
-    --text-color-dark: #333;
-    --text-color-light: #fff; /* For text on dark backgrounds */
-    --error-color: #dc3545;
-    --border-color: #ddd;
-    --secondary-text-color: #555;
-    --header-background: #f8f8f8; /* Header if applicable */
-    --box-shadow-color: rgba(0, 0, 0, 0.08); /* General box shadow */
-    --gradient-start: #6dd5ed;
-    --gradient-end: #2193b0;
-    --sidebar-width: 250px; /* Define sidebar width here */
-    --sidebar-background: #fff;
-    --sidebar-text-color: #333;
-    --sidebar-active-background: var(--primary-color);
-    --sidebar-active-text-color: var(--text-color-light);
+    /* --- Light Theme Variables (Default) --- */
+    --primary-color: #E74C3C; /* A vibrant red for primary actions/accents */
+    --primary-hover-color: #C0392B; /* Darker red for hover */
+
+    --background-color: #F8F8F8; /* Very light grey/off-white for main background */
+    --card-background: #FFFFFF; /* Pure white for cards */
+
+    --text-color-dark: #2C3E50; /* Dark charcoal/almost black for primary text */
+    --text-color-light: #FFFFFF; /* Pure white for text on dark/red backgrounds */
+    --secondary-text-color: #7F8C8D; /* Medium grey for less prominent text */
+
+    --error-color: #E74C3C; /* Red for errors */
+    --border-color: #ECF0F1; /* Light grey for borders */
+    --box-shadow-color: rgba(0, 0, 0, 0.08); /* Subtle black shadow */
+
+    --gradient-start: #ECECEC; /* Lighter grey for login page gradient */
+    --gradient-end: #BDC3C7; /* Slightly darker grey */
+
+    /* Sidebar specific colors for light theme */
+    --sidebar-width: 250px;
+    --sidebar-background: #FFFFFF; /* White sidebar */
+    --sidebar-text-color: #34495E; /* Dark blue-grey for sidebar text */
+    --sidebar-active-background: var(--primary-color); /* Red active link */
+    --sidebar-active-text-color: var(--text-color-light); /* White text on active link */
 }
 
-/* Dark Theme Variables */
+/* --- Dark Theme Variables --- */
 body.dark-theme {
-    --primary-color: #8be9fd; /* Lighter blue for dark mode accents */
-    --primary-hover-color: #bdc3c7; /* Grayish hover for accents */
-    --background-color: #282a36; /* Dracula background */
-    --card-background: #383a47; /* Slightly lighter card for contrast */
-    --text-color-dark: #f8f8f2; /* Light text on dark bg */
-    --text-color-light: #282a36; /* Dark text on light elements in dark mode (rare) */
-    --error-color: #ff5555;
-    --border-color: #44475a;
-    --secondary-text-color: #bdc3c7;
-    --header-background: #3a3c4a;
-    --box-shadow-color: rgba(0, 0, 0, 0.3);
-    --gradient-start: #44475a; /* Darker gradient for login page */
-    --gradient-end: #282a36;
-    --sidebar-background: #3a3c4a;
-    --sidebar-text-color: #f8f8f2;
-    --sidebar-active-background: var(--primary-color);
-    --sidebar-active-text-color: var(--text-color-dark); /* text-color-dark in dark theme is light */
+    --primary-color: #E74C3C; /* Keep red consistent, maybe slightly desaturated if needed for contrast, but vibrant red often works well */
+    --primary-hover-color: #FF6666; /* Slightly lighter red for hover in dark mode */
+
+    --background-color: #1A1A1A; /* Deep charcoal/almost black for main background */
+    --card-background: #2C2C2C; /* Slightly lighter charcoal for cards */
+
+    --text-color-dark: #ECF0F1; /* Off-white/light grey for primary text */
+    --text-color-light: #1A1A1A; /* Dark text for elements that are naturally light in dark mode (e.g., inside a light button) */
+    --secondary-text-color: #BDC3C7; /* Lighter grey for secondary text */
+
+    --error-color: #E74C3C; /* Red for errors */
+    --border-color: #34495E; /* Darker grey-blue for borders */
+    --box-shadow-color: rgba(0, 0, 0, 0.3); /* More pronounced black shadow */
+
+    --gradient-start: #2C3E50; /* Darker gradient for login page */
+    --gradient-end: #1A1A1A; /* Deep charcoal */
+
+    /* Sidebar specific colors for dark theme */
+    --sidebar-background: #2C2C2C; /* Darker sidebar */
+    --sidebar-text-color: #ECF0F1; /* Light text for sidebar */
+    --sidebar-active-background: var(--primary-color); /* Red active link */
+    --sidebar-active-text-color: var(--text-color-light); /* Light text on active link (this is fine, as text-color-light is dark in light mode, but here it's dark text color on a red background) */
 }
 
 
@@ -50,8 +60,8 @@ body.dark-theme {
 }
 
 html, body {
-    height: 100%; /* Ensure html and body take full height */
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -66,15 +76,13 @@ body {
 
 #root {
     min-height: 100vh;
-    /* OLD: display: flex; flex-direction: column; justify-content: center; align-items: center; */
-    /* NEW: Allow content to take full width and height for app layout */
-    display: flex; /* Use flex to manage sidebar and main content */
-    align-items: stretch; /* Stretch children (sidebar and main content) to fill height */
-    justify-content: flex-start; /* Align children to the start (sidebar first) */
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
 }
 
 a {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Uses the new red */
     text-decoration: none;
 }
 
@@ -102,16 +110,14 @@ button:hover {
     transition: color 0.3s ease;
 }
 
-/* Global Container for Authenticated Routes */
 .app-layout {
     display: flex;
-    min-height: 100vh; /* Ensure it takes full viewport height */
-    width: 100%; /* Take full width within #root */
+    min-height: 100vh;
+    width: 100%;
 }
 
-/* Main Content Area */
 .main-content {
-    flex-grow: 1; /* Allow main content to take remaining space */
-    padding: 20px; /* General padding, individual pages can override */
-    overflow-y: auto; /* Enable scrolling for main content if it overflows */
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
 }
