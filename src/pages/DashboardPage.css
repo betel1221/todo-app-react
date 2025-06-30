@@ -1,0 +1,259 @@
+.dashboard-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-light);
+    min-height: 100vh;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.logout-btn {
+    background-color: #ff6347; /* Tomato */
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #e55337; /* Darker Tomato */
+}
+
+/* Task Overview Cards */
+.task-overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.task-overview-cards .card {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.task-overview-cards .card:hover {
+    transform: translateY(-5px);
+}
+
+.task-overview-cards .card .material-icons {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.task-overview-cards .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.task-overview-cards .card p {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.total-tasks .material-icons { color: #5bc0de; } /* Info Blue */
+.active-tasks .material-icons { color: #f0ad4e; } /* Orange */
+.completed-tasks .material-icons { color: #28a745; } /* Green */
+.cleared-tasks .material-icons { color: #6c757d; } /* Gray */
+
+/* Charts Section */
+.charts-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.chart-card {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.chart-card h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    font-size: 1.5rem;
+}
+
+.chart-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Recent Activity Log */
+.recent-activity-log {
+    margin-bottom: 40px;
+}
+
+.recent-activity-log h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.activity-list {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 20px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item .material-icons {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.activity-item p {
+    font-size: 1rem;
+    color: #444;
+}
+
+.activity-item.completed .material-icons { color: #28a745; }
+.activity-item.edited .material-icons { color: #f0ad4e; }
+.activity-item.added .material-icons { color: var(--primary-color); }
+
+
+/* Achievements, Filters, Summary Actions - Basic styling */
+.achievements-section,
+.filters-section,
+.summary-actions {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.achievements-section h2,
+.filters-section h2,
+.summary-actions h2 {
+    font-size: 1.8rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.achievements-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.filter-options label {
+    font-size: 1.1rem;
+    color: #555;
+    margin-right: 10px;
+}
+
+.filter-options select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.summary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 0; /* Last section */
+}
+
+.summary-actions button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.summary-actions button:hover {
+    background-color: var(--primary-hover-color);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 20px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+
+    .task-overview-cards,
+    .charts-section {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .task-overview-cards .card {
+        padding: 20px;
+    }
+    .task-overview-cards .card p {
+        font-size: 2rem;
+    }
+    .summary-actions {
+        flex-direction: column;
+    }
+}

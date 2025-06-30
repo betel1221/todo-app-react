@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './LoginPage.css'; // We'll create this CSS file next
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './LoginPage.css';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -8,12 +9,9 @@ const LoginPage = () => {
     const [passwordError, setPasswordError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
-    const [isLoading, setIsLoading] = useState(false); // New state for loading
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Effect to validate inputs and enable/disable login button
-    useEffect(() => {
-        // No button state needed here, login button logic handles disable
-    }, [username, password]); // Re-run when username or password changes
+    const navigate = useNavigate(); // Initialize useNavigate hook
 
     // Effect to pre-fill username if "Remember Me" was checked
     useEffect(() => {
@@ -23,10 +21,10 @@ const LoginPage = () => {
             setUsername(storedUser);
             setRememberMe(true);
         }
-    }, []); // Run only once on component mount
+    }, []);
 
     const handleLogin = (e) => {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
 
         setUsernameError('');
         setPasswordError('');
@@ -38,7 +36,8 @@ const LoginPage = () => {
             isValid = false;
         }
         if (password.trim() === '') {
-            setPasswordError('Password is required.');
+            passwordError.textContent = 'Password is required.'; // Keep this line for password error
+            setPasswordError('Password is required.'); // Update state for React
             isValid = false;
         }
 
@@ -46,9 +45,8 @@ const LoginPage = () => {
             return;
         }
 
-        setIsLoading(true); // Set loading state
+        setIsLoading(true);
 
-        // Simulate API call for authentication
         setTimeout(() => {
             const correctUsername = 'user@example.com';
             const correctPassword = 'password123';
@@ -61,20 +59,19 @@ const LoginPage = () => {
                     localStorage.setItem('rememberMe', 'true');
                 } else {
                     sessionStorage.setItem('loggedInUser', username);
-                    localStorage.removeItem('loggedInUser'); // Clear if previously remembered
+                    localStorage.removeItem('loggedInUser');
                     localStorage.removeItem('rememberMe');
                 }
 
-                // In a real React app, we would use React Router to navigate
-                // For now, we'll simulate by redirecting
-                window.location.href = '/dashboard.html'; // This will be handled by React Router later
+                // *** Change this line for React Router navigation ***
+                navigate('/dashboard'); // Navigate to the dashboard route
             } else {
                 setUsernameError('Incorrect username or password.');
                 setPasswordError('Incorrect username or password.');
                 alert('Login Failed. Please check your credentials.');
             }
-            setIsLoading(false); // Reset loading state
-        }, 1500); // Simulate network delay
+            setIsLoading(false);
+        }, 1500);
     };
 
     const handleSocialLogin = (platform) => {
@@ -97,7 +94,7 @@ const LoginPage = () => {
             <div className="login-box">
                 <h3>Login or Sign Up</h3>
 
-                <form onSubmit={handleLogin}> {/* Wrap inputs in a form and use onSubmit */}
+                <form onSubmit={handleLogin}>
                     <div className="input-group">
                         <label htmlFor="username">
                             <span className="material-icons">person</span> Username or Email
@@ -109,7 +106,7 @@ const LoginPage = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                        <p className="error-message" id="username-error">{usernameError}</p>
+                        <p className="error-message">{usernameError}</p>
                     </div>
 
                     <div className="input-group">
@@ -126,13 +123,12 @@ const LoginPage = () => {
                             />
                             <span
                                 className="material-icons password-toggle"
-                                id="password-toggle"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? 'visibility' : 'visibility_off'}
                             </span>
                         </div>
-                        <p className="error-message" id="password-error">{passwordError}</p>
+                        <p className="error-message">{passwordError}</p>
                     </div>
 
                     <div className="options-row">
@@ -160,11 +156,11 @@ const LoginPage = () => {
 
                 <div className="social-login">
                     <button className="social-btn google" onClick={() => handleSocialLogin('Google')}>
-                        <img src="google.png" alt="Google icon" /> {/* Will add this icon to public folder */}
+                        <img src="google.png" alt="Google icon" />
                         Continue with Google
                     </button>
                     <button className="social-btn facebook" onClick={() => handleSocialLogin('Facebook')}>
-                        <img src="facebook.png" alt="Facebook icon" /> {/* Will add this icon to public folder */}
+                        <img src="facebook.png" alt="Facebook icon" />
                         Continue with Facebook
                     </button>
                 </div>
