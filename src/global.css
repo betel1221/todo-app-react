@@ -14,6 +14,11 @@
     --box-shadow-color: rgba(0, 0, 0, 0.08); /* General box shadow */
     --gradient-start: #6dd5ed;
     --gradient-end: #2193b0;
+    --sidebar-width: 250px; /* Define sidebar width here */
+    --sidebar-background: #fff;
+    --sidebar-text-color: #333;
+    --sidebar-active-background: var(--primary-color);
+    --sidebar-active-text-color: var(--text-color-light);
 }
 
 /* Dark Theme Variables */
@@ -31,6 +36,10 @@ body.dark-theme {
     --box-shadow-color: rgba(0, 0, 0, 0.3);
     --gradient-start: #44475a; /* Darker gradient for login page */
     --gradient-end: #282a36;
+    --sidebar-background: #3a3c4a;
+    --sidebar-text-color: #f8f8f2;
+    --sidebar-active-background: var(--primary-color);
+    --sidebar-active-text-color: var(--text-color-dark); /* text-color-dark in dark theme is light */
 }
 
 
@@ -40,22 +49,28 @@ body.dark-theme {
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%; /* Ensure html and body take full height */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
 body {
-    font-family: 'Roboto', sans-serif; /* We'll add this via Google Fonts */
-    background-color: var(--background-color); /* Use CSS variable */
-    color: var(--text-color-dark); /* Use CSS variable */
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* OLD: display: flex; flex-direction: column; justify-content: center; align-items: center; */
+    /* NEW: Allow content to take full width and height for app layout */
+    display: flex; /* Use flex to manage sidebar and main content */
+    align-items: stretch; /* Stretch children (sidebar and main content) to fill height */
+    justify-content: flex-start; /* Align children to the start (sidebar first) */
 }
 
 a {
@@ -73,17 +88,30 @@ button {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Add color transition */
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
 }
 
 button:hover {
     transform: translateY(-1px);
 }
 
-/* Material Icons styling - adjust size if needed */
 .material-icons {
     vertical-align: middle;
-    font-size: 20px; /* Default size */
+    font-size: 20px;
     margin-right: 5px;
-    transition: color 0.3s ease; /* Smooth icon color transition */
+    transition: color 0.3s ease;
+}
+
+/* Global Container for Authenticated Routes */
+.app-layout {
+    display: flex;
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    width: 100%; /* Take full width within #root */
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1; /* Allow main content to take remaining space */
+    padding: 20px; /* General padding, individual pages can override */
+    overflow-y: auto; /* Enable scrolling for main content if it overflows */
 }

@@ -1,0 +1,375 @@
+.tasks-container {
+    padding: 20px;
+    background-color: var(--background-color); /* Use global background */
+    color: var(--text-color-dark);
+    /* No max-width here, allow it to stretch with main-content */
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Task Input Section */
+.task-input-section {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+    margin-bottom: 30px;
+}
+
+.add-task-form {
+    display: flex;
+    gap: 15px;
+}
+
+.add-task-form input[type="text"] {
+    flex-grow: 1; /* Take up available space */
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    background-color: var(--background-color); /* input background */
+    color: var(--text-color-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-task-form input[type="text"]::placeholder {
+    color: var(--secondary-text-color);
+}
+
+.add-task-form input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Adjusted for theme */
+}
+
+.add-task-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.add-task-btn:hover {
+    background-color: var(--primary-hover-color);
+}
+
+
+/* Task Controls Section (Filters, Sort, Search, Clear Completed) */
+.task-controls {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
+    background-color: var(--card-background);
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between; /* Distribute items */
+}
+
+.task-controls .filters,
+.task-controls .sort-by {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+
+.task-controls select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.task-controls select:focus {
+    border-color: var(--primary-color);
+}
+
+.task-controls .search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow search bar to grow */
+    max-width: 300px; /* Max width for search input */
+    position: relative;
+}
+
+.task-controls .search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 40px; /* Left padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-controls .search-bar input::placeholder {
+    color: var(--secondary-text-color);
+}
+
+.task-controls .search-bar input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.task-controls .search-bar .search-icon {
+    position: absolute;
+    left: 10px;
+    color: var(--secondary-text-color);
+    font-size: 20px;
+}
+
+.clear-completed-btn {
+    background-color: #dc3545; /* Red for clear */
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.clear-completed-btn:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+
+/* Task List Section */
+.task-list-section {
+    background-color: var(--card-background);
+    padding: 20px 0; /* No horizontal padding on list itself */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+}
+
+.no-tasks-message {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px; /* Add horizontal padding here */
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item:hover {
+    background-color: var(--background-color); /* Light hover effect */
+}
+
+.task-checkbox {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    /* Custom checkbox styling */
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background-color: var(--card-background);
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.task-checkbox:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.task-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--text-color-light); /* White checkmark */
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.task-text {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    color: var(--text-color-dark);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--secondary-text-color);
+    opacity: 0.7;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 15px; /* Space from text */
+}
+
+.task-actions button {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.task-actions button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.task-actions .edit-btn:hover { background-color: #ffc107; border-color: #ffc107; color: #333; } /* Yellow */
+.task-actions .delete-btn:hover { background-color: #dc3545; border-color: #dc3545; } /* Red */
+.task-actions .restore-btn:hover { background-color: #17a2b8; border-color: #17a2b8; } /* Cyan */
+.task-actions .permanent-delete-btn:hover { background-color: #6c757d; border-color: #6c757d; } /* Gray */
+
+/* Edit mode styles */
+.task-item .edit-mode {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task-item .edit-mode input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+}
+
+.task-item .edit-mode button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border-color: var(--primary-color);
+}
+.task-item .edit-mode .save-btn { background-color: #28a745; border-color: #28a745; }
+.task-item .edit-mode .save-btn:hover { background-color: #218838; }
+.task-item .edit-mode .cancel-btn { background-color: #6c757d; border-color: #6c757d; }
+.task-item .edit-mode .cancel-btn:hover { background-color: #5a6268; }
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tasks-container {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+
+    .add-task-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+
+    .task-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .task-controls .filters,
+    .task-controls .sort-by,
+    .task-controls .search-bar {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .task-controls .search-bar input {
+        max-width: 100%;
+    }
+
+    .clear-completed-btn {
+        width: 100%;
+    }
+
+    .task-item {
+        flex-wrap: wrap; /* Allow content to wrap */
+        padding: 15px;
+    }
+
+    .task-checkbox {
+        margin-bottom: 10px; /* Space between checkbox and wrapped text */
+    }
+
+    .task-text {
+        flex-basis: 100%; /* Text takes full width */
+        margin-bottom: 10px;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end; /* Push buttons to right */
+        margin-left: 0;
+        gap: 5px; /* Smaller gap for buttons */
+    }
+
+    .task-item .edit-mode {
+        flex-wrap: wrap;
+    }
+
+    .task-item .edit-mode input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .task-item .edit-mode button {
+        flex-grow: 1; /* Make buttons grow on small screens */
+    }
+}

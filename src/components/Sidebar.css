@@ -1,0 +1,183 @@
+.sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width); /* Fixed width for desktop */
+    background-color: var(--sidebar-background);
+    color: var(--sidebar-text-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px var(--box-shadow-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header .app-logo {
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.sidebar-header h2 {
+    font-size: 1.8rem;
+    color: var(--text-color-dark);
+}
+
+.sidebar-nav {
+    flex-grow: 1; /* Allows nav to take up remaining space */
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: var(--sidebar-text-color);
+    font-size: 1.1rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.sidebar-nav .nav-link .material-icons {
+    font-size: 24px;
+    margin-right: 0; /* Override default material-icons margin */
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: var(--background-color); /* Lighter hover in light, darker in dark */
+    transform: translateX(3px);
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: var(--sidebar-active-background);
+    color: var(--sidebar-active-text-color);
+    font-weight: bold;
+    box-shadow: 0 2px 8px var(--box-shadow-color);
+}
+
+.sidebar-nav .nav-link.active .material-icons {
+    color: var(--sidebar-active-text-color);
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sidebar-footer p {
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+    margin-top: 15px;
+}
+
+.theme-toggle-btn {
+    width: 100%;
+    background-color: var(--background-color); /* Neutral background */
+    color: var(--text-color-dark);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--border-color);
+}
+
+.theme-toggle-btn .material-icons {
+    font-size: 24px;
+    margin-right: 0;
+}
+
+/* Responsive adjustments for sidebar (Hide on small screens, or turn into mobile nav) */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px; /* Collapsed sidebar */
+        min-width: 80px;
+        padding: 15px 10px;
+        overflow: hidden; /* Hide overflow text */
+        position: fixed; /* Make it sticky */
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+    }
+
+    .sidebar-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .sidebar-header h2 {
+        display: none; /* Hide app name on collapse */
+    }
+
+    .sidebar-header .app-logo {
+        font-size: 30px;
+        margin-right: 0;
+    }
+
+    .sidebar-nav .nav-link {
+        justify-content: center; /* Center icons */
+        padding: 10px;
+    }
+
+    .sidebar-nav .nav-link span:not(.material-icons) {
+        display: none; /* Hide link text */
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        margin-top: auto; /* Push to bottom */
+    }
+
+    .sidebar-footer p {
+        display: none; /* Hide copyright */
+    }
+
+    .theme-toggle-btn {
+        padding: 8px; /* Smaller padding */
+    }
+    .theme-toggle-btn span:not(.material-icons) {
+        display: none; /* Hide text, only show icon */
+    }
+
+    /* Adjust main content to make space for fixed sidebar */
+    body:not(.dark-theme) .main-content { /* For light theme */
+        margin-left: 80px;
+        width: calc(100% - 80px); /* Adjust width */
+    }
+    body.dark-theme .main-content { /* For dark theme */
+        margin-left: 80px;
+        width: calc(100% - 80px); /* Adjust width */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further small screen adjustments if needed */
+    /* For very small screens, a true mobile-first design would swap sidebar for a top nav or hamburger menu */
+    /* For this scope, let's keep the collapsed sidebar for simplicity. */
+}
