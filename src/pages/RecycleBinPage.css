@@ -1,0 +1,20 @@
+.recycle-bin-container {
+    padding: 20px;
+    background-color: var(--background-color); /* Use global background */
+    color: var(--text-color-dark);
+    /* No max-width here, allow it to stretch with main-content */
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.no-tasks-message {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+}
