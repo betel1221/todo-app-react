@@ -1,42 +1,72 @@
+/* src/pages/DashboardPage.css */
+
 .dashboard-container {
     padding: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: var(--background-light);
+    background-color: var(--dashboard-bg); /* Use new dashboard background variable */
     min-height: 100vh;
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
-    border-radius: 8px;
+    box-shadow: none; /* Remove direct box-shadow, will use neumorphic shadows on cards */
+    border-radius: 0; /* Container itself usually doesn't have border-radius */
+    transition: background-color 0.3s ease;
 }
 
+/* Dashboard Header */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-light); /* Use theme border */
 }
 
 .dashboard-header h1 {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--text-dark); /* Use dark text color */
 }
 
 .logout-btn {
-    background-color: #ff6347; /* Tomato */
-    color: var(--text-color-light);
+    background-color: var(--primary-brown); /* Use primary brown for logout button */
+    color: var(--text-light);
     padding: 10px 20px;
     font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 5px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .logout-btn:hover {
-    background-color: #e55337; /* Darker Tomato */
+    background-color: var(--primary-brown-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(var(--primary-brown-rgb), 0.2);
 }
 
-/* Task Overview Cards */
+/* Base Neumorphic Card Styling - this is the "template" */
+/* Note: The following properties will be copied to all elements that should look neumorphic */
+/*
+.neumorphic-card-template {
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+}
+
+.neumorphic-card-template:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+*/
+
+/* Task Overview Widgets (Cards) - Applying Neumorphic Styles Directly */
 .task-overview-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -45,44 +75,59 @@
 }
 
 .task-overview-cards .card {
-    background-color: var(--card-background);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    padding: 25px 20px; /* Adjust padding for better look */
 }
 
 .task-overview-cards .card:hover {
-    transform: translateY(-5px);
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
 }
 
 .task-overview-cards .card .material-icons {
     font-size: 40px;
     margin-bottom: 15px;
+    color: var(--text-dark); /* Default icon color */
 }
+
+/* Specific icon colors */
+.total-tasks .material-icons { color: var(--primary-brown); } /* Use primary brown for consistency */
+.active-tasks .material-icons { color: #f0ad4e; } /* Keep existing accent orange */
+.completed-tasks .material-icons { color: #28a745; } /* Keep existing green */
+.cleared-tasks .material-icons { color: var(--text-medium); } /* Use medium gray for cleared */
+/* New: Overdue and Due Today icon colors */
+.overdue-tasks .material-icons { color: var(--error-color); }
+.due-today-tasks .material-icons { color: #007bff; }
+
 
 .task-overview-cards .card h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #555;
+    color: var(--text-medium); /* Secondary text color */
 }
 
 .task-overview-cards .card p {
     font-size: 2.5rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--primary-brown); /* Accent color for numbers */
 }
 
-.total-tasks .material-icons { color: #5bc0de; } /* Info Blue */
-.active-tasks .material-icons { color: #f0ad4e; } /* Orange */
-.completed-tasks .material-icons { color: #28a745; } /* Green */
-.cleared-tasks .material-icons { color: #6c757d; } /* Gray */
-
-/* Charts Section */
+/* Charts Section - Applying Neumorphic Styles Directly */
 .charts-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -91,16 +136,32 @@
 }
 
 .chart-card {
-    background-color: var(--card-background);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content in chart cards */
+    min-height: 350px; /* Ensure consistent height for charts */
+}
+
+.chart-card:hover { /* Optional: add hover for charts as well */
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
 }
 
 .chart-card h3 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--text-color-dark);
+    color: var(--text-dark);
     font-size: 1.5rem;
 }
 
@@ -109,37 +170,426 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f8f8f8;
-    border: 1px dashed var(--border-color);
+    background-color: var(--input-bg-light); /* Lighter background for placeholder */
+    border: 1px dashed var(--input-border-light);
     border-radius: 8px;
-    color: #888;
+    color: var(--text-medium);
     font-style: italic;
+    height: 100%; /* Fill parent chart-card */
+    width: 100%;
 }
 
-/* Recent Activity Log */
+/* Progress Bars Section - Applying Neumorphic Styles Directly */
+.progress-bars-section {
+    margin-bottom: 40px;
+}
+
+.progress-bars-section h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.progress-bar-container {
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    margin-bottom: 15px; /* Space between bars */
+    padding: 20px;
+}
+
+.progress-bar-container:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
+.progress-bar-container h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.progress-bar-wrapper {
+    background-color: var(--input-bg-light); /* Lighter background for the track */
+    border-radius: 10px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05), inset -2px -2px 5px rgba(255, 255, 255, 0.7); /* Inner shadow for debossed effect */
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Initial state for animation */
+    border-radius: 10px;
+    background: linear-gradient(to right, #98d1c1, #28a745); /* Default green gradient */
+    transition: width 1s ease-out; /* Animation */
+}
+
+/* Color codes for progress */
+.progress-bar-fill.low { background: linear-gradient(to right, #f0ad4e, #dc3545); } /* Orange to Red */
+.progress-bar-fill.medium { background: linear-gradient(to right, #5bc0de, #007bff); } /* Blue */
+.progress-bar-fill.high { background: linear-gradient(to right, #98d1c1, #28a745); } /* Green */
+
+.progress-percentage {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    text-align: right;
+    margin-top: 5px;
+}
+
+
+/* Dynamic Task Timeline - Applying Neumorphic Styles Directly */
+.task-timeline-section {
+    margin-bottom: 40px;
+}
+
+.task-timeline-section h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.timeline-wrapper {
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    padding: 30px 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    white-space: nowrap; /* Keep items in one line */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.timeline-wrapper:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--input-border-light); /* Light line */
+    z-index: 1;
+}
+
+.timeline-item {
+    position: relative;
+    z-index: 2;
+    display: inline-flex; /* Align items horizontally */
+    flex-direction: column;
+    align-items: center;
+    padding: 0 30px; /* Space out items */
+    cursor: pointer;
+}
+
+.timeline-dot {
+    width: 15px;
+    height: 15px;
+    background-color: var(--primary-brown); /* Primary brown for dots */
+    border-radius: 50%;
+    border: 3px solid var(--card-neumorphic-bg); /* White border to stand out from line */
+    margin-bottom: 10px;
+    transform: translateY(-50%); /* Adjust to center on line */
+    transition: all 0.2s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+    background-color: var(--primary-brown-hover);
+    transform: scale(1.2) translateY(-50%);
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    margin-bottom: 5px;
+}
+
+.timeline-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+/* Quick Task Add Form - Applying Neumorphic Styles Directly */
+.quick-add-form-section {
+    margin-bottom: 40px;
+}
+
+.quick-add-form-section h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.quick-add-form {
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quick-add-form:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
+.quick-add-form .form-group label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Reusing Input.jsx custom-input style for quick add form */
+.quick-add-form button {
+    background-color: var(--primary-brown);
+    color: var(--text-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 10px;
+}
+
+.quick-add-form button:hover {
+    background-color: var(--primary-brown-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(var(--primary-brown-rgb), 0.2);
+}
+
+/* Filterable Task Summary Table - Applying Neumorphic Styles Directly */
+.task-summary-table-section {
+    margin-bottom: 40px;
+}
+
+.task-summary-table-section h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.task-summary-table-wrapper {
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    padding: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling for tables on small screens */
+}
+
+.task-summary-table-wrapper:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
+.task-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.task-summary-table th,
+.task-summary-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-dark);
+}
+
+.task-summary-table th {
+    background-color: var(--dashboard-bg); /* Use background for header */
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    cursor: pointer; /* For sortable headers */
+}
+
+.task-summary-table tbody tr:hover {
+    background-color: var(--bg-light-gray); /* Subtle hover for rows */
+}
+
+.task-summary-table td .status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-light); /* White text on badge */
+}
+
+.status-badge.completed { background-color: #28a745; }
+.status-badge.active { background-color: #007bff; }
+.status-badge.overdue { background-color: #dc3545; }
+.status-badge.cleared { background-color: #6c757d; } /* Added cleared status */
+.status-badge.todo { background-color: #6c757d; }
+
+
+/* Interactive Notifications - Applying Neumorphic Styles Directly */
+.notifications-section {
+    margin-bottom: 40px;
+}
+
+.notifications-section h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.notification-panel {
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
+    padding: 20px;
+}
+
+.notification-panel:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-light-gray); /* Subtle background for notifications */
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: slideIn 0.5s ease-out;
+}
+
+.notification-item.overdue { border-left: 5px solid var(--error-color); }
+.notification-item.upcoming { border-left: 5px solid var(--primary-brown); }
+
+.notification-item .material-icons {
+    font-size: 20px;
+    margin-right: 10px;
+    color: var(--text-dark);
+}
+
+.notification-item p {
+    flex-grow: 1;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.notification-item .dismiss-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-medium);
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.notification-item .dismiss-btn:hover {
+    color: var(--text-dark);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Recent Activity Log - Applying Neumorphic Styles Directly */
 .recent-activity-log {
     margin-bottom: 40px;
 }
 
 .recent-activity-log h2 {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--text-dark);
     margin-bottom: 25px;
     text-align: center;
 }
 
 .activity-list {
-    background-color: var(--card-background);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
     padding: 20px;
 }
+
+.activity-list:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
+}
+
 
 .activity-item {
     display: flex;
     align-items: center;
     padding: 15px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-light); /* Use theme border */
 }
 
 .activity-item:last-child {
@@ -149,57 +599,83 @@
 .activity-item .material-icons {
     font-size: 24px;
     margin-right: 15px;
+    color: var(--text-dark); /* Default icon color */
 }
 
 .activity-item p {
     font-size: 1rem;
-    color: #444;
+    color: var(--text-dark);
 }
 
 .activity-item.completed .material-icons { color: #28a745; }
 .activity-item.edited .material-icons { color: #f0ad4e; }
-.activity-item.added .material-icons { color: var(--primary-color); }
+.activity-item.added .material-icons { color: var(--primary-brown); }
 
 
-/* Achievements, Filters, Summary Actions - Basic styling */
+/* Achievements, Filters, Summary Actions - Applying Neumorphic Styles Directly */
 .achievements-section,
 .filters-section,
 .summary-actions {
-    background-color: var(--card-background);
+    /* Neumorphic Card Styles */
+    background-color: var(--card-neumorphic-bg);
+    border-radius: 1rem;
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 2) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 2) var(--card-neumorphic-shadow-2);
+    transition: all 0.3s ease;
+    /* End Neumorphic Card Styles */
+
     padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     margin-bottom: 30px;
     text-align: center;
+}
+
+.achievements-section:hover,
+.filters-section:hover,
+.summary-actions:hover {
+    box-shadow:
+        var(--shadow-light-x) var(--shadow-light-y) calc(var(--shadow-light-x) * 3) var(--card-neumorphic-shadow-1),
+        var(--shadow-dark-x) var(--shadow-dark-y) calc(var(--shadow-dark-x) * 3) var(--card-neumorphic-shadow-2);
+    transform: translateY(-2px);
 }
 
 .achievements-section h2,
 .filters-section h2,
 .summary-actions h2 {
     font-size: 1.8rem;
-    color: #444;
+    color: var(--text-dark);
     margin-bottom: 20px;
 }
 
 .achievements-section p {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--text-medium);
     margin-bottom: 10px;
 }
 
 .filter-options label {
     font-size: 1.1rem;
-    color: #555;
+    color: var(--text-dark);
     margin-right: 10px;
 }
 
+/* Ensure select elements also get neumorphic input styles */
 .filter-options select {
     padding: 8px 12px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    border: 1px solid var(--input-border-light);
+    background-color: var(--input-bg-light); /* Neumorphic input background */
     font-size: 1rem;
+    color: var(--text-dark);
     outline: none;
     cursor: pointer;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05), inset -2px -2px 5px rgba(255, 255, 255, 0.7); /* Inner shadow */
+    transition: all 0.2s ease;
+}
+
+.filter-options select:focus {
+    border-color: var(--primary-brown);
+    box-shadow: 0 0 0 3px rgba(var(--primary-brown-rgb), 0.2);
 }
 
 .summary-actions {
@@ -215,12 +691,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: var(--primary-color);
-    color: var(--text-color-light);
+    background-color: var(--primary-brown); /* Use primary brown */
+    color: var(--text-light);
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .summary-actions button:hover {
-    background-color: var(--primary-hover-color);
+    background-color: var(--primary-brown-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(var(--primary-brown-rgb), 0.2);
 }
 
 
@@ -243,6 +726,14 @@
     .task-overview-cards,
     .charts-section {
         grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+
+    .chart-card {
+        min-height: 300px; /* Adjust height for smaller screens */
+    }
+
+    .timeline-item {
+        padding: 0 20px; /* Less padding for timeline on small screens */
     }
 }
 

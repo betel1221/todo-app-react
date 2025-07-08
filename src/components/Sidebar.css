@@ -1,183 +1,192 @@
+/* src/components/Sidebar.css */
+
 .sidebar {
     width: var(--sidebar-width);
-    min-width: var(--sidebar-width); /* Fixed width for desktop */
+    min-width: var(--sidebar-width); /* Ensure it maintains width */
     background-color: var(--sidebar-background);
     color: var(--sidebar-text-color);
-    padding: 20px;
+    padding: 20px 0;
+    box-shadow: var(--box-shadow-color) 2px 0px 5px;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 10px var(--box-shadow-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease-in-out; /* Smooth transition for open/close */
+    z-index: 1000; /* Ensure it stays on top */
+    position: fixed; /* Fixed position */
+    height: 100vh; /* Full height */
+    left: 0;
+    top: 0;
+}
+
+body.dark-theme .sidebar {
+    background-color: var(--sidebar-background);
+    color: var(--sidebar-text-color);
+    box-shadow: var(--box-shadow-color) 2px 0px 5px;
 }
 
 .sidebar-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 0 20px 20px 20px;
+    border-bottom: 1px solid var(--border-color); /* Separator */
+    margin-bottom: 20px;
 }
 
-.sidebar-header .app-logo {
-    font-size: 36px;
+.sidebar-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    white-space: nowrap; /* Prevent title from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-toggle-button {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-toggle-button:hover {
+    background-color: var(--border-color);
     color: var(--primary-color);
 }
 
-.sidebar-header h2 {
-    font-size: 1.8rem;
-    color: var(--text-color-dark);
-}
-
-.sidebar-nav {
-    flex-grow: 1; /* Allows nav to take up remaining space */
-}
-
-.sidebar-nav ul {
+.sidebar-menu {
     list-style: none;
+    flex-grow: 1;
     padding: 0;
 }
 
-.sidebar-nav li {
-    margin-bottom: 10px;
+.sidebar-menu li {
+    margin-bottom: 5px;
 }
 
-.sidebar-nav .nav-link {
+.sidebar-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-    border-radius: 8px;
+    padding: 10px 20px;
     color: var(--sidebar-text-color);
-    font-size: 1.1rem;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.sidebar-nav .nav-link .material-icons {
-    font-size: 24px;
-    margin-right: 0; /* Override default material-icons margin */
+.sidebar-item .material-icons {
+    margin-right: 15px;
+    font-size: 22px;
 }
 
-.sidebar-nav .nav-link:hover {
-    background-color: var(--background-color); /* Lighter hover in light, darker in dark */
-    transform: translateX(3px);
+.sidebar-item-text {
+    flex-grow: 1; /* Allows text to take available space */
 }
 
-.sidebar-nav .nav-link.active {
+.sidebar-item:hover {
+    background-color: var(--border-color); /* A light hover for non-active */
+    color: var(--primary-color);
+}
+
+.sidebar-item.active {
     background-color: var(--sidebar-active-background);
     color: var(--sidebar-active-text-color);
-    font-weight: bold;
-    box-shadow: 0 2px 8px var(--box-shadow-color);
+    font-weight: 600;
 }
 
-.sidebar-nav .nav-link.active .material-icons {
+.sidebar-item.active .material-icons {
     color: var(--sidebar-active-text-color);
 }
 
 .sidebar-footer {
-    padding-top: 20px;
+    padding: 20px;
     border-top: 1px solid var(--border-color);
-    text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.sidebar-footer p {
-    font-size: 0.85rem;
-    color: var(--secondary-text-color);
-    margin-top: 15px;
-}
-
-.theme-toggle-btn {
+.logout-button {
     width: 100%;
-    background-color: var(--background-color); /* Neutral background */
-    color: var(--text-color-dark);
-    border: 1px solid var(--border-color);
+    background: none; /* No background for logout button in sidebar */
+    text-align: left;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 15px;
-    font-size: 1rem;
+    padding: 10px 20px;
+    color: var(--secondary-text-color);
 }
 
-.theme-toggle-btn:hover {
-    background-color: var(--border-color);
+.logout-button:hover {
+    background-color: var(--error-color); /* Red hover for logout */
+    color: var(--text-color-light); /* White text on red */
+    transform: none; /* No lift for logout button */
 }
 
-.theme-toggle-btn .material-icons {
-    font-size: 24px;
-    margin-right: 0;
+.logout-button .material-icons {
+    margin-right: 15px;
+    font-size: 22px;
 }
 
-/* Responsive adjustments for sidebar (Hide on small screens, or turn into mobile nav) */
+
+/* --- Collapsed Sidebar State (for larger screens when toggled) --- */
+.sidebar:not(.open) {
+    width: 80px; /* Collapsed width */
+    min-width: 80px;
+}
+
+.sidebar:not(.open) .sidebar-item-text,
+.sidebar:not(.open) .sidebar-title,
+.sidebar:not(.open) .sidebar-footer .logout-button .sidebar-item-text {
+    display: none; /* Hide text when collapsed */
+}
+
+.sidebar:not(.open) .sidebar-header {
+    justify-content: center; /* Center the toggle button */
+    padding: 0 0 20px 0;
+}
+
+.sidebar:not(.open) .sidebar-toggle-button {
+    transform: rotateY(180deg); /* Optional: Flip icon when collapsed */
+}
+
+
+/* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
     .sidebar {
-        width: 80px; /* Collapsed sidebar */
-        min-width: 80px;
-        padding: 15px 10px;
-        overflow: hidden; /* Hide overflow text */
-        position: fixed; /* Make it sticky */
+        position: fixed; /* Keep it fixed */
+        left: -100%; /* Hide off-screen by default */
         top: 0;
-        left: 0;
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
         height: 100vh;
-        z-index: 1000;
+        transform: translateX(0); /* Reset transform */
+        box-shadow: var(--box-shadow-color) 2px 0px 5px; /* Re-apply shadow */
     }
 
-    .sidebar-header {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
+    .sidebar.open {
+        left: 0; /* Slide in when open */
     }
 
-    .sidebar-header h2 {
-        display: none; /* Hide app name on collapse */
+    .sidebar .sidebar-toggle-button {
+        display: none; /* Hide this specific toggle button for mobile when it's part of sidebar */
+    }
+    
+    /* Ensure text is always visible on mobile if sidebar is open */
+    .sidebar.open .sidebar-item-text,
+    .sidebar.open .sidebar-title,
+    .sidebar.open .sidebar-footer .logout-button .sidebar-item-text {
+        display: block;
     }
 
-    .sidebar-header .app-logo {
-        font-size: 30px;
-        margin-right: 0;
+    .sidebar.open .sidebar-header {
+        justify-content: space-between; /* Restore original header layout */
     }
-
-    .sidebar-nav .nav-link {
-        justify-content: center; /* Center icons */
-        padding: 10px;
+    .sidebar.open .sidebar-toggle-button {
+        display: block; /* Show the toggle button again if it's meant to be inside */
+        transform: none; /* Reset transform for mobile open state */
     }
-
-    .sidebar-nav .nav-link span:not(.material-icons) {
-        display: none; /* Hide link text */
-    }
-
-    .sidebar-footer {
-        padding-top: 15px;
-        margin-top: auto; /* Push to bottom */
-    }
-
-    .sidebar-footer p {
-        display: none; /* Hide copyright */
-    }
-
-    .theme-toggle-btn {
-        padding: 8px; /* Smaller padding */
-    }
-    .theme-toggle-btn span:not(.material-icons) {
-        display: none; /* Hide text, only show icon */
-    }
-
-    /* Adjust main content to make space for fixed sidebar */
-    body:not(.dark-theme) .main-content { /* For light theme */
-        margin-left: 80px;
-        width: calc(100% - 80px); /* Adjust width */
-    }
-    body.dark-theme .main-content { /* For dark theme */
-        margin-left: 80px;
-        width: calc(100% - 80px); /* Adjust width */
-    }
-}
-
-@media (max-width: 480px) {
-    /* Further small screen adjustments if needed */
-    /* For very small screens, a true mobile-first design would swap sidebar for a top nav or hamburger menu */
-    /* For this scope, let's keep the collapsed sidebar for simplicity. */
 }

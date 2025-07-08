@@ -1,41 +1,48 @@
+// src/context/ThemeContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create the context
-const ThemeContext = createContext();
+// 1. Create the Context
+const ThemeContext = createContext(undefined); // Default to undefined
 
-// Custom hook to use the theme context
+// 2. Create a custom hook to use the ThemeContext
 export const useTheme = () => {
-    return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };
 
-// Theme Provider Component
+// 3. Create the ThemeProvider component
 export const ThemeProvider = ({ children }) => {
-    // Get theme from localStorage or default to 'light'
-    const [theme, setTheme] = useState(() => {
-        const savedTheme = localStorage.getItem('theme');
-        return savedTheme || 'light';
-    });
+  // Get theme from localStorage, or default to 'light'
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
-    // Effect to apply the theme class to the body and save to localStorage
-    useEffect(() => {
-        document.body.className = theme === 'dark' ? 'dark-theme' : '';
-        localStorage.setItem('theme', theme);
-    }, [theme]); // Rerun whenever the theme state changes
+  useEffect(() => {
+    // IMPORTANT: Use classList.add/remove to manage classes without overwriting others
+    // First, remove both possible theme classes to ensure clean state
+    document.body.classList.remove('light-theme', 'dark-theme');
 
-    // Function to toggle theme
-    const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-    };
+    // Then, add the current theme class
+    document.body.classList.add(`${theme}-theme`); // This will add 'light-theme' or 'dark-theme'
 
-    // The value provided to consumers of this context
-    const value = {
-        theme,
-        toggleTheme,
-    };
+    // Save theme preference to localStorage
+    localStorage.setItem('theme', theme);
+  }, [theme]); // Re-run effect whenever 'theme' changes
 
-    return (
-        <ThemeContext.Provider value={value}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  // The value provided to consumers of this context
+  const contextValue = {
+    theme,
+    toggleTheme,
+  };
+
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };

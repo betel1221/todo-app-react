@@ -1,123 +1,89 @@
-/* Basic Reset & Font */
+/* src/index.css */
+
+/* Define global CSS variables */
 :root {
-    /* --- Light Theme Variables (Default) --- */
-    --primary-color: #E74C3C; /* A vibrant red for primary actions/accents */
-    --primary-hover-color: #C0392B; /* Darker red for hover */
+  /* Primary brand colors - adjusted for light brown/gold theme */
+  --primary-brown: #d2b48c; /* Light brown/tan, like dashboard button */
+  --primary-brown-hover: #c4a77b; /* Slightly darker brown for hover */
+  --primary-brown-rgb: 210, 180, 140; /* RGB for rgba() usage */
 
-    --background-color: #F8F8F8; /* Very light grey/off-white for main background */
-    --card-background: #FFFFFF; /* Pure white for cards */
+  --accent-blue-light: #add8e6; /* Light blue, for image section background gradient */
+  --accent-lavender-light: #e6e6fa; /* Light lavender, for image section background gradient */
 
-    --text-color-dark: #2C3E50; /* Dark charcoal/almost black for primary text */
-    --text-color-light: #FFFFFF; /* Pure white for text on dark/red backgrounds */
-    --secondary-text-color: #7F8C8D; /* Medium grey for less prominent text */
+  /* Page background for light theme - subtle light brown gradient for "shadow" effect */
+  --page-bg-gradient-start-light: #fdfdfd; /* Almost white */
+  --page-bg-gradient-end-light: #f5f5f0; /* Very light beige/brown */
 
-    --error-color: #E74C3C; /* Red for errors */
-    --border-color: #ECF0F1; /* Light grey for borders */
-    --box-shadow-color: rgba(0, 0, 0, 0.08); /* Subtle black shadow */
+  /* Text Colors */
+  --text-dark: #1f2937; /* Very dark gray for most text */
+  --text-medium: #6b7280; /* Medium gray for secondary text */
+  --text-light: #ffffff; /* White text, e.g., on buttons */
+  --text-accent: var(--primary-brown); /* Accent color for links/logos */
 
-    --gradient-start: #ECECEC; /* Lighter grey for login page gradient */
-    --gradient-end: #BDC3C7; /* Slightly darker grey */
+  /* Backgrounds & Borders */
+  --bg-white: #ffffff; /* Main card background, and background for dashboard cards */
+  --bg-light-gray: #f9fafb; /* For subtle backgrounds, e.g., social button hover or very light elements */
+  --border-light: #e5e7eb; /* Light gray border */
+  --input-bg-light: #f3f4f6; /* Very light gray/blue for input backgrounds */
+  --input-border-light: #d1d5db; /* Lighter gray for input borders */
 
-    /* Sidebar specific colors for light theme */
-    --sidebar-width: 250px;
-    --sidebar-background: #FFFFFF; /* White sidebar */
-    --sidebar-text-color: #34495E; /* Dark blue-grey for sidebar text */
-    --sidebar-active-background: var(--primary-color); /* Red active link */
-    --sidebar-active-text-color: var(--text-color-light); /* White text on active link */
+  /* Shadows (for Neumorphism) */
+  --shadow-light-x: 5px; /* Offset for light shadow */
+  --shadow-light-y: 5px;
+  --shadow-dark-x: -5px; /* Offset for dark shadow */
+  --shadow-dark-y: -5px;
+
+  --shadow-light-color: rgba(200, 200, 200, 0.4); /* Light shadow color */
+  --shadow-dark-color: rgba(0, 0, 0, 0.1); /* Dark shadow color */
+
+  /* Used for main card background (if not white) or general background in dashboard */
+  --dashboard-bg: var(--page-bg-gradient-end-light); /* Base for dashboard, a light beige */
+
+  /* Card specific colors for neumorphism on a light background */
+  --card-neumorphic-shadow-1: rgba(174, 174, 192, 0.4); /* Light source shadow */
+  --card-neumorphic-shadow-2: rgba(255, 255, 255, 0.6); /* Dark source shadow */
+  --card-neumorphic-bg: var(--bg-white); /* White background for neumorphic elements */
+
+  /* Error Color */
+  --error-color: #dc2626; /* A standard red for errors */
 }
 
-/* --- Dark Theme Variables --- */
+/* Dark theme overrides */
 body.dark-theme {
-    --primary-color: #E74C3C; /* Keep red consistent, maybe slightly desaturated if needed for contrast, but vibrant red often works well */
-    --primary-hover-color: #FF6666; /* Slightly lighter red for hover in dark mode */
+  --text-dark: #e5e7eb; /* Light text */
+  --text-medium: #9ca3af; /* Muted light text */
+  --input-border-light: #6b7280; /* Darker input border for consistency */
 
-    --background-color: #1A1A1A; /* Deep charcoal/almost black for main background */
-    --card-background: #2C2C2C; /* Slightly lighter charcoal for cards */
+  /* Page background for dark theme */
+  --page-bg-gradient-start-dark: #202020; /* Dark charcoal */
+  --page-bg-gradient-end-dark: #303030; /* Slightly lighter charcoal */
+  --dashboard-bg: var(--page-bg-gradient-end-dark);
 
-    --text-color-dark: #ECF0F1; /* Off-white/light grey for primary text */
-    --text-color-light: #1A1A1A; /* Dark text for elements that are naturally light in dark mode (e.g., inside a light button) */
-    --secondary-text-color: #BDC3C7; /* Lighter grey for secondary text */
+  /* Shadows for dark theme neumorphism */
+  --shadow-light-color: rgba(60, 60, 60, 0.8);
+  --shadow-dark-color: rgba(0, 0, 0, 0.4);
 
-    --error-color: #E74C3C; /* Red for errors */
-    --border-color: #34495E; /* Darker grey-blue for borders */
-    --box-shadow-color: rgba(0, 0, 0, 0.3); /* More pronounced black shadow */
-
-    --gradient-start: #2C3E50; /* Darker gradient for login page */
-    --gradient-end: #1A1A1A; /* Deep charcoal */
-
-    /* Sidebar specific colors for dark theme */
-    --sidebar-background: #2C2C2C; /* Darker sidebar */
-    --sidebar-text-color: #ECF0F1; /* Light text for sidebar */
-    --sidebar-active-background: var(--primary-color); /* Red active link */
-    --sidebar-active-text-color: var(--text-color-light); /* Light text on active link (this is fine, as text-color-light is dark in light mode, but here it's dark text color on a red background) */
+  --card-neumorphic-shadow-1: rgba(0, 0, 0, 0.5); /* Darker shadow for neumorphism */
+  --card-neumorphic-shadow-2: rgba(60, 60, 60, 0.8); /* Lighter shadow for dark neumorphism */
+  --card-neumorphic-bg: #2b2b2b; /* Darker background for neumorphic elements */
 }
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Base styles for body and root to ensure full page height and font consistency */
+body, #root {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif; /* Prioritize Inter if available, fallback to sans-serif */
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-html, body {
-    height: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color-dark);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
+/* Ensure #root takes full height of body */
 #root {
-    min-height: 100vh;
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
+  flex-grow: 1;
 }
 
-a {
-    color: var(--primary-color); /* Uses the new red */
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
-}
-
-button:hover {
-    transform: translateY(-1px);
-}
-
-.material-icons {
-    vertical-align: middle;
-    font-size: 20px;
-    margin-right: 5px;
-    transition: color 0.3s ease;
-}
-
-.app-layout {
-    display: flex;
-    min-height: 100vh;
-    width: 100%;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
+/* If you need a font like 'Inter', include it in your index.html: */
+/* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> */
+/* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> */
