@@ -1,0 +1,292 @@
+.login-container {
+    display: flex;
+    flex-direction: column; /* Changed to column to stack welcome message and login box */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Take full viewport height */
+    width: 100%; /* Take full width */
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); /* Use themed gradient */
+    color: var(--text-color-dark); /* Use themed text color */
+    padding: 20px; /* Add some padding */
+    box-sizing: border-box; /* Include padding in width/height */
+    transition: background 0.3s ease; /* Smooth transition for theme change */
+}
+
+.login-container h2 {
+    font-size: 2.5rem;
+    color: var(--text-color-dark); /* Primary text color for heading */
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 500px; /* Limit width of heading */
+}
+
+.login-box {
+    background-color: var(--card-background); /* Themed card background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px var(--box-shadow-color); /* Themed shadow */
+    width: 100%;
+    max-width: 400px; /* Keep a max-width for the login box itself */
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.login-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--primary-color); /* Use primary brand color */
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--secondary-text-color); /* Themed secondary text */
+    font-size: 0.95rem;
+}
+
+.input-group .material-icons {
+    font-size: 18px; /* Slightly smaller icons for labels */
+    vertical-align: middle;
+    margin-right: 5px;
+    color: var(--primary-color); /* Primary color for icons */
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color); /* Themed border */
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    background-color: var(--background-color); /* Themed background for input field */
+    color: var(--text-color-dark); /* Themed text color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input[type="text"]::placeholder,
+.input-group input[type="password"]::placeholder {
+    color: var(--secondary-text-color); /* Themed placeholder color */
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: var(--primary-color); /* Focus border in brand color */
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb-alpha), 0.25); /* Need RGBA version for this */
+    /* For now, let's simplify if no RGB version is available: */
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.25); /* Fallback to hardcoded red RGB if not defined */
+}
+
+/* Password Toggle */
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--secondary-text-color); /* Themed secondary text for icon */
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--primary-color); /* Primary color on hover */
+}
+
+.error-message {
+    color: var(--error-color); /* Themed error color (red) */
+    font-size: 0.85rem;
+    margin-top: 5px;
+    height: 18px; /* Maintain height to prevent layout shift */
+    text-align: left;
+}
+
+/* Options Row */
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--secondary-text-color); /* Themed secondary text */
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: var(--background-color); /* Themed background */
+    border: 1px solid var(--border-color); /* Themed border */
+    border-radius: 3px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    background-color: var(--border-color); /* Lighter background on hover */
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary-color); /* Themed primary color when checked */
+    border-color: var(--primary-color);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--text-color-light); /* Themed light text (white) */
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.forgot-password {
+    color: var(--primary-color); /* Themed primary color */
+    font-weight: 500;
+}
+
+#login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color); /* Themed primary color */
+    color: var(--text-color-light); /* Themed light text */
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+#login-button:hover:not(:disabled) {
+    background-color: var(--primary-hover-color); /* Themed hover color */
+}
+
+#login-button:disabled {
+    background-color: var(--border-color); /* Greyed out when disabled */
+    color: var(--secondary-text-color);
+    cursor: not-allowed;
+    transform: none; /* No hover transform when disabled */
+}
+
+.separator {
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--secondary-text-color); /* Themed secondary text */
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color); /* Themed border */
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: var(--background-color); /* Themed background for social buttons */
+    color: var(--text-color-dark); /* Themed dark text */
+    border: 1px solid var(--border-color); /* Themed border */
+}
+
+.social-btn:hover {
+    background-color: var(--border-color); /* Lighter hover for social buttons */
+}
+
+.social-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.signup-text {
+    font-size: 0.95rem;
+    color: var(--secondary-text-color); /* Themed secondary text */
+}
+
+.signup-text a {
+    font-weight: bold;
+    color: var(--primary-color); /* Themed primary color for link */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .login-box h3 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+
+    .login-container h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+}

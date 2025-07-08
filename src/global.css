@@ -1,0 +1,123 @@
+/* Basic Reset & Font */
+:root {
+    /* --- Light Theme Variables (Default) --- */
+    --primary-color: #E74C3C; /* A vibrant red for primary actions/accents */
+    --primary-hover-color: #C0392B; /* Darker red for hover */
+
+    --background-color: #F8F8F8; /* Very light grey/off-white for main background */
+    --card-background: #FFFFFF; /* Pure white for cards */
+
+    --text-color-dark: #2C3E50; /* Dark charcoal/almost black for primary text */
+    --text-color-light: #FFFFFF; /* Pure white for text on dark/red backgrounds */
+    --secondary-text-color: #7F8C8D; /* Medium grey for less prominent text */
+
+    --error-color: #E74C3C; /* Red for errors */
+    --border-color: #ECF0F1; /* Light grey for borders */
+    --box-shadow-color: rgba(0, 0, 0, 0.08); /* Subtle black shadow */
+
+    --gradient-start: #ECECEC; /* Lighter grey for login page gradient */
+    --gradient-end: #BDC3C7; /* Slightly darker grey */
+
+    /* Sidebar specific colors for light theme */
+    --sidebar-width: 250px;
+    --sidebar-background: #FFFFFF; /* White sidebar */
+    --sidebar-text-color: #34495E; /* Dark blue-grey for sidebar text */
+    --sidebar-active-background: var(--primary-color); /* Red active link */
+    --sidebar-active-text-color: var(--text-color-light); /* White text on active link */
+}
+
+/* --- Dark Theme Variables --- */
+body.dark-theme {
+    --primary-color: #E74C3C; /* Keep red consistent, maybe slightly desaturated if needed for contrast, but vibrant red often works well */
+    --primary-hover-color: #FF6666; /* Slightly lighter red for hover in dark mode */
+
+    --background-color: #1A1A1A; /* Deep charcoal/almost black for main background */
+    --card-background: #2C2C2C; /* Slightly lighter charcoal for cards */
+
+    --text-color-dark: #ECF0F1; /* Off-white/light grey for primary text */
+    --text-color-light: #1A1A1A; /* Dark text for elements that are naturally light in dark mode (e.g., inside a light button) */
+    --secondary-text-color: #BDC3C7; /* Lighter grey for secondary text */
+
+    --error-color: #E74C3C; /* Red for errors */
+    --border-color: #34495E; /* Darker grey-blue for borders */
+    --box-shadow-color: rgba(0, 0, 0, 0.3); /* More pronounced black shadow */
+
+    --gradient-start: #2C3E50; /* Darker gradient for login page */
+    --gradient-end: #1A1A1A; /* Deep charcoal */
+
+    /* Sidebar specific colors for dark theme */
+    --sidebar-background: #2C2C2C; /* Darker sidebar */
+    --sidebar-text-color: #ECF0F1; /* Light text for sidebar */
+    --sidebar-active-background: var(--primary-color); /* Red active link */
+    --sidebar-active-text-color: var(--text-color-light); /* Light text on active link (this is fine, as text-color-light is dark in light mode, but here it's dark text color on a red background) */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+a {
+    color: var(--primary-color); /* Uses the new red */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+.material-icons {
+    vertical-align: middle;
+    font-size: 20px;
+    margin-right: 5px;
+    transition: color 0.3s ease;
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
